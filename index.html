@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>你的名字 · 个人主页</title>
+<meta name="description" content="你的个人简历与作品集" />
+<!--
+  ==================================================================
+  这是一个「单文件」网页：所有内容都在 index.html 这一个文件里。
+  想改内容：用记事本或 VS Code 打开本文件，
+            按 Ctrl+F 搜索【改这里】，把后面的文字换成你自己的。
+  改完保存，重新上传到 GitHub，1~2 分钟后网址上就会更新。
+  ==================================================================
+-->
+<style>
+:root{
+  --main:#2f6fed;
+  --main-dark:#1f4fb8;
+  --text:#1f2328;
+  --muted:#6a737d;
+  --line:#e6e8eb;
+  --card:#f7f8fa;
+  --max:900px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  color:var(--text);background:#fff;line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px;}
+
+/* ---------- 顶部导航 ---------- */
+header{
+  position:sticky;top:0;z-index:10;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(180%) blur(8px);
+  border-bottom:1px solid var(--line);
+}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;}
+.logo{font-weight:700;font-size:17px;color:var(--text);text-decoration:none;}
+nav a{color:var(--muted);text-decoration:none;font-size:15px;margin-left:20px;transition:color .2s;}
+nav a:hover{color:var(--main);}
+
+/* ---------- 首屏 ---------- */
+.hero{padding:64px 0 56px;text-align:center;}
+.avatar{
+  width:118px;height:118px;border-radius:50%;
+  background:linear-gradient(135deg,var(--main),#7aa5ff);
+  color:#fff;font-size:44px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 22px;
+  box-shadow:0 10px 28px rgba(47,111,237,.28);
+}
+/* 想换成真实头像：把上面这段 .avatar 里的内容删掉，
+   换成 <img class="avatar-img" src="images/avatar.jpg" alt="头像"> 即可 */
+.hero h1{margin:0 0 8px;font-size:34px;letter-spacing:-.5px;}
+.hero .tagline{color:var(--main);font-weight:600;margin:0 0 10px;font-size:16px;}
+.hero p.intro{color:var(--muted);margin:0 auto 26px;max-width:520px;}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn{
+  display:inline-block;padding:11px 24px;border-radius:999px;
+  text-decoration:none;font-size:15px;font-weight:600;transition:.2s;
+}
+.btn-primary{background:var(--main);color:#fff;}
+.btn-primary:hover{background:var(--main-dark);}
+.btn-ghost{border:1px solid var(--line);color:var(--text);}
+.btn-ghost:hover{border-color:var(--main);color:var(--main);}
+
+/* ---------- 通用区块 ---------- */
+section{padding:52px 0;border-top:1px solid var(--line);}
+h2{font-size:22px;margin:0 0 22px;letter-spacing:-.3px;}
+h2::before{
+  content:"";display:inline-block;width:4px;height:18px;
+  background:var(--main);border-radius:2px;
+  margin-right:10px;vertical-align:-2px;
+}
+.card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:12px;padding:20px 22px;margin-bottom:14px;
+  transition:.2s;
+}
+.card:hover{border-color:#c9d6f5;transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(31,35,40,.06);}
+.card h3{margin:0 0 6px;font-size:17px;}
+.card p{margin:0;color:var(--muted);font-size:15px;}
+.card a{color:var(--main);text-decoration:none;font-size:14px;font-weight:600;}
+.card a:hover{text-decoration:underline;}
+
+/* ---------- 技能标签 ---------- */
+.tags{display:flex;flex-wrap:wrap;gap:10px;}
+.tag{
+  background:#fff;border:1px solid var(--line);border-radius:999px;
+  padding:7px 16px;font-size:14px;color:#3d444d;
+}
+
+/* ---------- 联系我 ---------- */
+.contact-list{display:flex;flex-wrap:wrap;gap:14px;}
+.contact-list a{
+  display:flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid var(--line);border-radius:10px;
+  padding:12px 18px;text-decoration:none;color:var(--text);
+  font-size:15px;transition:.2s;
+}
+.contact-list a:hover{border-color:var(--main);color:var(--main);}
+
+/* ---------- 页脚 ---------- */
+footer{
+  border-top:1px solid var(--line);padding:28px 0 40px;
+  text-align:center;color:var(--muted);font-size:14px;
+}
+
+/* ---------- 手机适配 ---------- */
+@media (max-width:640px){
+  nav{display:none;}
+  .hero{padding:44px 0 40px;}
+  .hero h1{font-size:26px;}
+  .avatar{width:96px;height:96px;font-size:36px;}
+  h2{font-size:19px;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">【改这里】你的名字</a>
+    <nav>
+      <a href="#about">关于我</a>
+      <a href="#skills">技能</a>
+      <a href="#works">项目</a>
+      <a href="#contact">联系我</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==================== 首屏 ==================== -->
+<div class="hero wrap" id="top">
+  <div class="avatar">M</div><!-- 【改这里】把 M 换成你名字的首字母 -->
+
+  <h1>【改这里】你的名字</h1>
+  <p class="tagline">【改这里】一句话标语，比如：前端开发者 / 摄影师</p>
+  <p class="intro">【改这里】一两句话介绍你自己：你是谁、在做什么、有什么特点。</p>
+
+  <div class="btns">
+    <a class="btn btn-primary" href="#contact">联系我</a>
+    <a class="btn btn-ghost" href="#works">看看我的项目</a>
+  </div>
+</div>
+
+<!-- ==================== 关于我 ==================== -->
+<section id="about">
+  <div class="wrap">
+    <h2>关于我</h2>
+    <p>【改这里】写一段自我介绍。可以写你的经历、你擅长什么、你对什么感兴趣、现在在做什么。</p>
+  </div>
+</section>
+
+<!-- ==================== 技能 ==================== -->
+<section id="skills">
+  <div class="wrap">
+    <h2>技能</h2>
+    <div class="tags">
+      <span class="tag">【改这里】技能一</span>
+      <span class="tag">【改这里】技能二</span>
+      <span class="tag">【改这里】技能三</span>
+      <span class="tag">【改这里】技能四</span>
+      <span class="tag">【改这里】技能五</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 项目 ==================== -->
+<section id="works">
+  <div class="wrap">
+    <h2>项目 / 作品</h2>
+
+    <div class="card">
+      <h3>【改这里】项目名称一</h3>
+      <p>【改这里】一两句话说明这个项目是做什么的、你负责了什么。</p>
+      <a href="#">查看详情 →</a>
+    </div>
+
+    <div class="card">
+      <h3>【改这里】项目名称二</h3>
+      <p>【改这里】一两句话说明这个项目是做什么的、你负责了什么。</p>
+      <a href="#">查看详情 →</a>
+    </div>
+
+    <div class="card">
+      <h3>【改这里】项目名称三</h3>
+      <p>【改这里】一两句话说明这个项目是做什么的、你负责了什么。</p>
+      <a href="#">查看详情 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 联系我 ==================== -->
+<section id="contact">
+  <div class="wrap">
+    <h2>联系我</h2>
+    <p style="color:var(--muted);margin-top:0;">欢迎通过下面的方式找到我 👇</p>
+    <div class="contact-list">
+      <!-- 【改这里】把 href 里的邮箱换成你的邮箱 -->
+      <a href="mailto:your@email.com">📮 邮箱：your@email.com</a>
+      <!-- 【改这里】把链接换成你的 GitHub 主页 -->
+      <a href="https://github.com/Milly11ccQ" target="_blank" rel="noopener">💻 GitHub</a>
+      <!-- 【改这里】换成你的微信 / 小红书 / B站等；不需要就删掉这一行 -->
+      <a href="#">💬 微信：你的微信号</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © <span id="year">2025</span> 【改这里】你的名字 · 用 ❤️ 制作
+  </div>
+</footer>
+
+<script>
+  // 自动显示当前年份，不用手动改
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
